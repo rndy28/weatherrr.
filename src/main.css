@@ -17,11 +17,10 @@
 
 body {
     font-family: "Outfit", sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #202124;
+    display: flex;
+    justify-content: center;
+    padding-top: 3rem;
 }
 button,
 input {
@@ -31,16 +30,13 @@ input {
     font-size: inherit;
 }
 .container {
-    width: 65%;
-    max-width: 45rem;
+    width: 90%;
+    max-width: 20rem;
 }
 .card {
     width: 100%;
     min-height: 23rem;
     background-color: inherit;
-    border-radius: var(--border-radius);
-    border: var(--border);
-    padding: 1.5rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,6 +47,19 @@ input {
     display: flex;
     justify-content: space-between;
 }
+.card-header {
+    flex-direction: column-reverse;
+    gap: 1rem;
+}
+.card-footer {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: scroll;
+    width: 100%;
+}
+.card-footer::-webkit-scrollbar {
+    display: none;
+}
 .card-wrapper {
     position: relative;
     right: 1.2rem;
@@ -58,20 +67,28 @@ input {
 
 .card-wrapper > img {
     position: relative;
-    bottom: 1rem;
+    bottom: 1.2rem;
 }
-.card-title {
+.card-weather-location {
     font-weight: 400;
     color: #e8eaed;
+    font-size: 1.3rem;
 }
-.card-weather-desc {
+.card-weather-info {
     display: flex;
     flex-direction: column;
-    font-size: 0.813rem;
     margin-top: 1px;
 }
-.card-weather-desc > span {
+.card-weather-info > span {
     color: #9aa0a6;
+    font-size: 0.813rem;
+}
+.card-weather-description {
+    color: #9aa0a6;
+    font-weight: 400;
+    font-size: 1rem;
+    text-transform: capitalize;
+    margin-top: 0.3rem;
 }
 .card-weather-units {
     margin-inline: 0.7rem;
@@ -113,17 +130,14 @@ input {
     gap: 0.3rem;
     justify-content: center;
 }
-.card-weather-degrees  {
+.card-weather-degrees {
     font-weight: 500;
     font-size: 0.9rem;
 }
-.card-weather-degree{
+.card-weather-degree {
     font-size: 2.5rem;
     font-weight: 400;
     color: #e8eaed;
-}
-.is-hidden {
-    display: none;
 }
 .card-weather-day-name {
     text-transform: capitalize;
@@ -137,14 +151,13 @@ input {
 .form {
     display: flex;
     justify-content: space-between;
-    height: 3.2rem;
+    height: 3rem;
     margin-bottom: 1.5rem;
 }
 
 .input-wrapper {
-    
     border-radius: var(--border-radius);
-    width: 70%;
+    width: 60%;
     height: inherit;
     padding-left: 1rem;
     display: flex;
@@ -158,11 +171,19 @@ input {
     padding-right: 1rem;
     color: #e8eaed;
 }
+.input-search-icon {
+    width: 1rem;
+    height: 1rem;
+}
+.input,
+.btn {
+    font-family: 0.813rem;
+}
 .btn {
     border-radius: var(--border-radius);
     background-color: #2d334a;
     height: inherit;
-    width: 25%;
+    width: 35%;
     color: #e8eaed;
     font-weight: 500;
     cursor: pointer;
@@ -170,4 +191,47 @@ input {
 }
 .btn:hover {
     opacity: 0.8;
+}
+.is-hidden {
+    display: none;
+}
+.loading {
+    color: #e8eaed;
+    margin: auto;
+    display: none;
+}
+.card.is-loading .loading {
+    display: block;
+}
+
+@media (min-width: 800px) {
+    body {
+        min-height: 100vh;
+        align-items: center;
+        padding-top: 0;
+    }
+    .container {
+        max-width: 40rem;
+        width: 60%;
+    }
+    .card {
+        min-height: 21rem;
+        padding-top: 1rem;
+    }
+    .card-header {
+        flex-direction: row;
+    }
+    .card-weather-location {
+        font-size: 2rem;
+    }
+    .card-weather-description {
+        font-size: 1.2rem;
+    }
+    .input-wrapper {
+        width: 70%;
+    }
+    .btn {
+        width: 25%;
+    }
+    
 }

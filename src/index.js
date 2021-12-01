@@ -2,6 +2,11 @@ import './main.css';
 
 const OPENWEATHERMAPAPIKEY = 'f8fc3d49501b6e98fb4c4cc98c678350'
 
+
+window.addEventListener('load', () => {
+    document.querySelector('.js-card').classList.remove('is-loading')
+})
+
 async function fetchData(url) {
     try {
         const res = await fetch(url)
@@ -35,13 +40,17 @@ function renderHeader(forecasts, locationData) {
     <span class="card-weather-unit is-active">°C</span>
     <span class="card-weather-unit js-fahrenheit-symbol">°F</span>
     </div>
-        <div class="card-weather-desc js-card-weather-desc">
+        <div class="card-weather-info">
             <span class="js-weather-cloudiness">Cloudiness: ${forecasts[0].clouds}%</span>
             <span class="js-weather-humidity">Humidity: ${forecasts[0].humidity}%</span>
             <span class="js-weather-wind">Wind: ${MtoKM(forecasts[0].wind_speed)} km/h</span>
         </div>
     </div>
-    <h2 class="card-title">${locationData.city ?? locationData.name}, ${locationData.country_code2 ?? locationData.sys.country}</h2>`
+    <div>
+    <h2 class="card-weather-location">${locationData.city ?? locationData.name}, ${locationData.country_code2 ?? locationData.sys.country}</h2>
+    <h4 class="card-weather-description js-weather-desc">${forecasts[0].weather[0].description}</h4>
+    </div>
+    `
     changeUnit()
 }
 
@@ -59,7 +68,7 @@ function renderFooter(forecasts) {
         <h3 class="card-weather-day-name">${getDayName(daily.dt)}</h3>
         <img src=http://openweathermap.org/img/wn/${daily.weather[0].icon}.png alt=""/>
         <div class="card-weather-degrees"->
-        <h4 class="card-weather-daily-temp">${FtoC(daily.temp.min)}°</h4>
+        <h4 class="card-weather-daily-temp">${FtoC(daily.temp.max)}°</h4>
         </div>
         </div>`}).join('')}`
 }
@@ -92,6 +101,7 @@ function changeDay(forecasts) {
     const weatherCloudiness = document.querySelector('.js-weather-cloudiness');
     const weatherHumidity = document.querySelector('.js-weather-humidity');
     const weatherWind = document.querySelector('.js-weather-wind');
+    const weatherDesc = document.querySelector('.js-weather-desc')
 
     cardDays[0].classList.add('is-active');
     cardDays.forEach(day => {
@@ -106,6 +116,7 @@ function changeDay(forecasts) {
                 weatherCloudiness.textContent = `Cloudiness: ${selectedDay.clouds}%`
                 weatherHumidity.textContent = `Humidity: ${selectedDay.humidity}%`
                 weatherWind.textContent = `Wind: ${selectedDay.wind_speed}`
+                weatherDesc.textContent = selectedDay.weather[0].description
             }
         })
     })
