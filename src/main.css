@@ -33,6 +33,14 @@ input {
     width: 90%;
     max-width: 20rem;
 }
+.loading {
+    color: #e8eaed;
+    font-size: 1.3rem;
+    align-self: center;
+}
+.hide-loading {
+    display: none;
+}
 .card {
     width: 100%;
     min-height: 23rem;
@@ -194,14 +202,6 @@ input {
 }
 .is-hidden {
     display: none;
-}
-.loading {
-    color: #e8eaed;
-    margin: auto;
-    display: none;
-}
-.card.is-loading .loading {
-    display: block;
 }
 
 @media (min-width: 800px) {

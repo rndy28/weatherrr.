@@ -3,10 +3,6 @@ import './main.css';
 const OPENWEATHERMAPAPIKEY = 'f8fc3d49501b6e98fb4c4cc98c678350'
 
 
-window.addEventListener('load', () => {
-    document.querySelector('.js-card').classList.remove('is-loading')
-})
-
 async function fetchData(url) {
     try {
         const res = await fetch(url)
@@ -20,6 +16,7 @@ async function fetchData(url) {
 async function getData() {
     const locationData = await fetchData('https://api.ipgeolocation.io/ipgeo?apiKey=7bb60ddeb98e4fb78aa1871630149afd')
     const forecastData = await fetchData(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationData.latitude}&lon=${locationData.longitude}&units=imperial&exclude=minutely,hourly,alerts&appid=${OPENWEATHERMAPAPIKEY}`);
+    document.querySelector('.loading').classList.add('hide-loading')
     const forecasts = [forecastData.current, ...forecastData.daily]
     Card(forecasts, locationData)
 }
